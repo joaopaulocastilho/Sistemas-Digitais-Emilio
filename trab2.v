@@ -1,5 +1,5 @@
 module counter32bits(input clk, input reset, output [31:0] num);
-   reg[31:0] numb = 0;
+   reg[31:0] numb;
    
    assign num = numb;
 
@@ -9,14 +9,14 @@ module counter32bits(input clk, input reset, output [31:0] num);
 endmodule // counter32bits
 
 module verifica_num(input clk, input [31:0] num, output reset, output [7:0] led);
-   reg ledR = 0;
-   reg resetR = 0;
-
+   reg [7:0] ledR = 8'b01010101;
+   reg resetR;
+	
    assign reset = resetR;
    assign led = ledR;
 
    always @(clk)
-     if(num == 5)
+     if(num == 50000000)
        begin
 	  resetR <= 1;
 	  ledR <= ~ledR;
@@ -38,7 +38,7 @@ module trab2(input CLOCK_50, output [7:0] LEDG);
    assign LEDG = ledins;   
 endmodule // trab2
 
-module test;
+/*module test;
    reg clk;
    wire [7:0] led;
 
@@ -52,10 +52,7 @@ module test;
 	#500
 	$finish;
      end
-   
-   
-
 endmodule // test
-
+*/
 
    
