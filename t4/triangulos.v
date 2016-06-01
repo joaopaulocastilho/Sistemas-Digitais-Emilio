@@ -37,6 +37,7 @@ endmodule // verifica
 module test;
    integer input_file;
    integer output_file;
+   integer t5_file;
    
    reg [90:0] value;
 
@@ -48,8 +49,9 @@ module test;
    
    initial begin
       input_file  = $fopen("input.in", "r");
-      output_file = $fopen("verilog.out", "w");
-      
+      output_file = $fopen("v.out", "w");
+      t5_file = $fopen("verilog.out");      
+
       if(input_file == 0) begin
 	 $display("Não consigo abrir arquivo");
 	 $finish;
@@ -61,7 +63,8 @@ module test;
 	 value = $fscanf(input_file, "%d %d %d %d %d %d %d %d\n", x1, y1, x2, y2, x3, y3, px, py);
 	 #1
 	   $fwrite(output_file, "A(%0d,%0d), B(%0d,%0d), C(%0d,%0d), P(%0d,%0d) \t= %0d\n", x1, y1, x2, y2, x3, y3, px, py, s);
-      end
+	$fwrite(t5_file, "%0d\n", s);      
+	end
       else
 	$finish;
    end
